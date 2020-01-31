@@ -91,9 +91,11 @@ def show_time(question):
 общий вес всех животных = {sum(i.weight for i in enimals_list)}кг
 самое тяжелое животное - {max_weight_class} {max_weight_name} и весит {max_weight}кг
 ###################################################################''')
-
+        elif question == 'Q':
+            print('Пока-пока!')
+            return False
         elif question not in enimals_names_list:
-            return False # print('К сожалению, такого имени нет.')
+            return print('К сожалению, такого имени нет.')
 
 
 
@@ -115,4 +117,7 @@ if __name__ == '__main__':
 [!] ДЛЯ ВЫХОДА НАЖМИТЕ 'q' ''') 
 
     while True:
-        show_time(question())
+        if show_time(question()) == False:
+            break
+        else:
+            pass
