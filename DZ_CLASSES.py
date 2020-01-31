@@ -1,5 +1,5 @@
 # класс животных
-class Animal():
+class Animal:
     def __init__(self, class_name='животина', voice='голос', name='Без имени', use='действие', weight=10):
         self.class_name = class_name
         self.name = name
@@ -62,7 +62,7 @@ for enimal in enimals_list:
 
 # получаем имя животного от юзера
 def question():
-    question = input ('''Кого хотите помотреть? (напишите имя)
+    question = input ('''\nКого хотите помотреть? (напишите имя)
 достсупные варианты:
 гусь "Серый"
 гусь "Белый"
