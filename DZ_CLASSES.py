@@ -81,7 +81,7 @@ def question():
 
 
 
-# вывод информации на основании данных из функции qwestion()
+# вывод информации на основании данных из функции question()
 def show_time(question):
     for enimal in enimals_list:
         if question in enimals_names_list:
