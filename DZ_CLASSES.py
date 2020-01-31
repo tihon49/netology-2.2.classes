@@ -8,8 +8,8 @@ class Animal():
         self.health = 100
         self.weight = weight
 
-    def feed(self):
-        self.health += 10
+    def feed(self, value):
+        self.health += value
         return f'{self.name} - покормлен(а) и здоровья теперь - {self.health}%'
 
     def action(self):
@@ -63,7 +63,6 @@ for enimal in enimals_list:
 # получаем имя животного от юзера
 def question():
     question = input ('''Кого хотите помотреть? (напишите имя)
-
 достсупные варианты:
 гусь "Серый"
 гусь "Белый"
@@ -75,7 +74,6 @@ def question():
 овЕц "Кудрявый"
 коза (еще какая) "Рога"
 коза (не лучше предыдущей) "Копыта"
-
 итак, Ваш выбор: ''')
     return question.capitalize()
 
@@ -93,7 +91,7 @@ def show_time(question):
 спросите какая от меня польза? ну как минимум можно {enimal.action()}
 голос мой звучит так: {enimal.voice}
 одну минуточку, хочу немного перекусить......
-спустя 30 минут... {enimal.feed()} !!!
+спустя 30 минут... {enimal.feed(10)} !!!
 :)
 
 
