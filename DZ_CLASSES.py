@@ -1,9 +1,8 @@
 # класс животных
 class Animal:
-    def __init__(self, class_name='животина', voice='голос', name='Без имени', use='действие', weight=10):
+    def __init__(self, class_name='животина', voice='голос', name='Без имени', weight=10):
         self.class_name = class_name
         self.name = name
-        self.use = use
         self.voice = voice
         self.health = 100
         self.weight = weight
@@ -12,112 +11,98 @@ class Animal:
         self.health += value
         return f'{self.name} - покормлен(а) и здоровья теперь - {self.health}%'
 
+    def weight_show(self):
+        return self.weight
+
+    def voice_listen(self):
+        return self.voice
+
     def action(self):
-        return self.use
+        return 'погладить =)'
+
+
+
+class Birds(Animal):
+    def action(self):
+        return 'собирать яйца'
+
+
+
+class Hooves(Animal):
+    def action(self):
+        return 'доить'
+
+
+
+class Sheeps(Animal):
+    def action(self):
+        return 'стричь'
 
 
 
 #                   ПТИЦЫ
 # гуси
-guce_grey = Animal('гусь', 'кря-кря', 'Серый', 'собирать яйца', 15)
-guce_white = Animal('гусь', 'кря-кря', 'Белый', 'собирать яйца', 17)
+guce_grey = Birds('гусь', 'кря-кря', 'Серый', 15)
+guce_white = Birds('гусь', 'кря-кря', 'Белый', 17)
 
 # куры
-chicken = Animal('курица', 'ко-ко-ко', 'Ко-ко', 'собирать яйца', 3)
-rooster = Animal('курица', 'ко-ко-ку-ка-ре-ку-я-ж-петух!', 'Кукареку', 'собирать яйца', 5)
+chicken = Birds('курица', 'ко-ко-ко', 'Ко-ко', 3)
+rooster = Birds('курица', 'ко-ко-ку-ка-ре-ку-я-ж-петух!', 'Кукареку', 5)
 
 # утка
-duck = Animal('утка', 'кря-кря', 'Кряква', 'собирать яйца')
+duck = Birds('утка', 'кря-кря', 'Кряква',)
 
 
 
 #                   КОПЫТНЫЕ
 # корова
-cow = Animal('корова', 'Му-му', 'Манька', 'доить', 150)
+cow = Hooves('корова', 'Му-му', 'Манька', 150)
 
 # овцы
-sheep_barash = Animal('овца', 'бе-бе', 'Барашек', 'стричь', 63)
-sheep_curly = Animal('овца', 'бе-бе', 'Кудрявый', 'стричь', 45)
+sheep_barash = Sheeps('овца', 'бе-бе', 'Барашек', 63)
+sheep_curly = Sheeps('овца', 'бе-бе', 'Кудрявый', 45)
 
 # козы
-goat_horns = Animal('коза', 'блеееееэээ', 'Рога', 'доить', 35)
-goat_hooves = Animal('коза', 'блеееееэээ', 'Копыта', 'доить', 28)
+goat_horns = Hooves('коза', 'блеееееэээ', 'Рога', 35)
+goat_hooves = Hooves('коза', 'блеееееэээ', 'Копыта', 28)
 
 # списки животных и их имен
 enimals_list = [guce_grey, guce_white, chicken, rooster, duck, cow, sheep_curly, sheep_barash, goat_horns, goat_hooves]
 enimals_names_list = [enimal.name for enimal in enimals_list]
+
 
 # вычисляем самое тяжелое животное
 max_weight = 0
 max_weight_class = ''
 max_weight_name = ''
 
+
 for enimal in enimals_list:
-    if enimal.weight > max_weight:
-        max_weight = enimal.weight
+    # вес взял с помощью метода .weight_show()
+    if enimal.weight_show() > max_weight:
+        max_weight = enimal.weight_show()
         max_weight_class = enimal.class_name
         max_weight_name = enimal.name
 
 
 
-# получаем имя животного от юзера
-def question():
-    question = input ('''
-\nКого хотите помотреть? (напишите имя)
-Ваш выбор: ''')
-
-    return question.capitalize()
-
-
-
-# вывод информации на основании данных из функции question()
-def show_time(question):
-    for enimal in enimals_list:
-        if question in enimals_names_list:
-            if question == enimal.name:
-                print (f'''
-###################################################################
-Привет, я {enimal.class_name}, и меня зовут {enimal.name}
-со здоровьем всё в порядке, оно составляет - {enimal.health}%
-мой вес в данный момент = {enimal.weight}кг
-спросите какая от меня польза? ну как минимум можно {enimal.action()}
-голос мой звучит так: {enimal.voice}
-одну минуточку, хочу немного перекусить......
-спустя 30 минут... {enimal.feed(10)} !!!
-:)
-
-
-для информации:
-общий вес всех животных = {sum(i.weight for i in enimals_list)}кг
-самое тяжелое животное - {max_weight_class} {max_weight_name} и весит {max_weight}кг
-###################################################################''')
-        elif question == 'Q':
-            print('Пока-пока!')
-            return False
-        elif question not in enimals_names_list:
-            return print('К сожалению, такого имени нет.')
+# вывод информации:
+print('Задача №1:')
+print('Животное: ' + goat_hooves.class_name,\
+      '\nИмя: ' + goat_hooves.name,\
+      '\nГолос: ' + goat_hooves.voice_listen(),\
+      '\nВес:', goat_hooves.weight_show())
 
 
 
-# запускаем шарманку!!!
-if __name__ == '__main__':
-    print('''
-достсупные варианты:
-гусь "Серый"
-гусь "Белый"
-курица "Ко-Ко"
-курица (но это не точно) "Кукареку"
-утка "Кряква"
-корова "Манька"
-овЕц "Барашек"
-овЕц "Кудрявый"
-коза (еще какая) "Рога"
-коза (не лучше предыдущей) "Копыта"
+print('\n\nЗадача №2:')
+print(chicken.feed(10))
+print('Животное ' + sheep_barash.class_name +\
+      ' по имени ' + sheep_barash.name +\
+      ' можно ' + sheep_barash.action())
 
-[!] ДЛЯ ВЫХОДА НАЖМИТЕ 'q' ''') 
 
-    while True:
-        if show_time(question()) == False:
-            break
-        else:
-            pass
+
+print('\n\nЗадача №3:')
+print('Самое тяжелое животное ' + max_weight_class,\
+      'по имени ' + max_weight_name, 'весит:', max_weight, 'кг')
