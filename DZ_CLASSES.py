@@ -125,6 +125,7 @@ print(goat_horns.feed())
 print('Животное', sheep_curly.class_name, 'по имени', sheep_curly.name, \
       'можно', sheep_curly.action())
 
+
 #Задача №3
 print('\nЗадача №3')
 print('Самое тяжелое животное зовут', Animal.max_weight_name, 'весит:', Animal.max_weight, 'кг')
