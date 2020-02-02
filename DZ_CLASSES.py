@@ -1,108 +1,131 @@
-# класс животных
+# общий класс животных
 class Animal:
-    def __init__(self, class_name='животина', voice='голос', name='Без имени', weight=10):
-        self.class_name = class_name
+    total_weight = 0
+    max_weight = 0
+    max_weight_name = ''
+
+    def __init__(self, name='Без имени', weight=1):
         self.name = name
-        self.voice = voice
-        self.health = 100
         self.weight = weight
+        Animal.total_weight += self.weight
 
-    def feed(self, value):
-        self.health += value
-        return f'{self.name} - покормлен(а) и здоровья теперь - {self.health}%'
+        if self.weight > Animal.max_weight:
+            Animal.max_weight = self.weight
+            Animal.max_weight_name = self.name
 
-    def weight_show(self):
-        return self.weight
-
-    def voice_listen(self):
-        return self.voice
+    def feed(self):
+        return f'{self.name} - покормлен(а)'
 
     def action(self):
         return 'погладить =)'
 
 
+###################################################
+### ОПРЕДЕЛЕНИЕ КОАССОВ НАСЛЕДОВАННЫХ ОТ ANIMAL ###
+class Chicken(Animal):
+    class_name = 'курица'
 
-class Birds(Animal):
+    def get_voice(self):
+        return 'ko-ko'
+
     def action(self):
         return 'собирать яйца'
 
 
 
-class Hooves(Animal):
+class Duck(Animal):
+    class_name = 'утка'
+
+    def get_voice(self):
+        return 'кря-кря'
+
+    def action(self):
+        return 'собирать яйца'
+
+
+
+class Guse(Animal):
+    class_name = 'гусь'
+
+    def get_voice(self):
+        return 'кря-кря'
+
+    def action(self):
+        return 'собирать яйца'
+
+
+
+class Cow(Animal):
+    class_name = 'корова'
+
+    def get_voice(self):
+        return 'му-му'
+
     def action(self):
         return 'доить'
 
 
 
-class Sheeps(Animal):
+class Sheep(Animal):
+    class_name = 'овца'
+
+    def get_voice(self):
+        return 'бе-бе'
+
     def action(self):
         return 'стричь'
 
 
 
-#                   ПТИЦЫ
+class Goat(Animal):
+    class_name = 'коза'
+
+    def get_voice(self):
+        return 'бле-бле'
+
+    def action(self):
+        return 'доить'
+
+###################################################
+
 # гуси
-guce_grey = Birds('гусь', 'кря-кря', 'Серый', 15)
-guce_white = Birds('гусь', 'кря-кря', 'Белый', 17)
+guce_grey = Guse('Серый', 7)
+guce_white = Guse('Белый', 5)
 
 # куры
-chicken = Birds('курица', 'ко-ко-ко', 'Ко-ко', 3)
-rooster = Birds('курица', 'ко-ко-ку-ка-ре-ку-я-ж-петух!', 'Кукареку', 5)
+chicken_koko = Chicken('Ко-ко', 3)
+rooster = Chicken('Кукареку', 4)
 
 # утка
-duck = Birds('утка', 'кря-кря', 'Кряква',)
+duck = Duck('Кряква', 5)
 
-
-
-#                   КОПЫТНЫЕ
 # корова
-cow = Hooves('корова', 'Му-му', 'Манька', 150)
+cow = Cow('Манька', 150)
 
 # овцы
-sheep_barash = Sheeps('овца', 'бе-бе', 'Барашек', 63)
-sheep_curly = Sheeps('овца', 'бе-бе', 'Кудрявый', 45)
+sheep_barash = Sheep('Барашек', 45)
+sheep_curly = Sheep('Кудрявый', 60)
 
 # козы
-goat_horns = Hooves('коза', 'блеееееэээ', 'Рога', 35)
-goat_hooves = Hooves('коза', 'блеееееэээ', 'Копыта', 28)
+goat_horns = Goat('Рога', 30)
+goat_hooves = Goat('Копыта', 34)
 
-# списки животных и их имен
-enimals_list = [guce_grey, guce_white, chicken, rooster, duck, cow, sheep_curly, sheep_barash, goat_horns, goat_hooves]
-enimals_names_list = [enimal.name for enimal in enimals_list]
+###################################################
 
 
-# вычисляем самое тяжелое животное
-max_weight = 0
-max_weight_class = ''
-max_weight_name = ''
+# Задача №1
+print('Задача №1')
+print('Животное:', duck.class_name, ' Имя:', duck.name + \
+      '\nГолос:', duck.get_voice(), ' вес:', duck.weight, 'кг')
 
 
-for enimal in enimals_list:
-    # вес взял с помощью метода .weight_show()
-    if enimal.weight_show() > max_weight:
-        max_weight = enimal.weight_show()
-        max_weight_class = enimal.class_name
-        max_weight_name = enimal.name
+# Задача №2
+print('\nЗадача №2')
+print(goat_horns.feed())
+print('Животное', sheep_curly.class_name, 'по имени', sheep_curly.name, \
+      'можно', sheep_curly.action())
 
-
-
-# вывод информации:
-print('Задача №1:')
-print('Животное: ' + goat_hooves.class_name,\
-      '\nИмя: ' + goat_hooves.name,\
-      '\nГолос: ' + goat_hooves.voice_listen(),\
-      '\nВес:', goat_hooves.weight_show())
-
-
-
-print('\n\nЗадача №2:')
-print(chicken.feed(10))
-print('Животное ' + sheep_barash.class_name +\
-      ' по имени ' + sheep_barash.name +\
-      ' можно ' + sheep_barash.action())
-
-
-
-print('\n\nЗадача №3:')
-print('Самое тяжелое животное ' + max_weight_class,\
-      'по имени ' + max_weight_name, 'весит:', max_weight, 'кг')
+#Задача №3
+print('\nЗадача №3')
+print('Самое тяжелое животное зовут', Animal.max_weight_name, 'весит:', Animal.max_weight, 'кг')
+print('Общий вес всех животных:', Animal.total_weight, 'кг')
